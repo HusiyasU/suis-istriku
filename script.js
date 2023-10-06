@@ -1,5 +1,7 @@
-const mainContainer = document.querySelector(".main-container");
-const imagePreviews = document.querySelectorAll(".image-preview");
+const mainContainer = document.querySelector(".main-container"),
+        imagePreviews = document.querySelectorAll(".image-preview"),
+        images = mainContainer.querySelectorAll(".image-preview img"),
+        video = mainContainer.querySelectorAll("video");
 
 window.onload = () => {
     mainContainer.onmouseenter = () => {
@@ -20,8 +22,16 @@ window.onload = () => {
         tl.to(imagePreview, {
             duration: 1,
             clipPath: "polygon(0 0, 100% 0%, 100% 100%, 0% 100%)",
-            stagger: 0.1,
-            delay: index * 0.1 // Add a delay to stagger the animations
+            stagger: 0.1
         });
     });
+
+    imagePreviews.forEach((image, index) => {
+        image.onmouseenter = () => {
+            video[index].play();
+        }
+        image.onmouseleave =() => {
+            video[index].pause();
+        }
+    })
 };
